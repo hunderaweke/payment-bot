@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "chapa-bot"
+version = "0.1.0"
+description = ""
+authors = ["hunderaweke <hunderaweke@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+python-telegram-bot = "13.4"
+chapa = "^0.0.5"
+python-dotenv = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
