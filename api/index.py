@@ -1,4 +1,4 @@
-import os, logging
+import os
 from typing import Final, Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -12,13 +12,11 @@ from telegram import (
 )
 from telegram.ext import (
     Dispatcher,
-    Updater,
     CommandHandler,
     CallbackContext,
     CallbackQueryHandler,
 )
 
-logging.basicConfig(level=logging.DEBUG)
 TOKEN = os.environ.get("TOKEN")
 app = FastAPI()
 USDT_ADDRESS: Final[str] = "6661370496:AAENCRyfkghI1spqh0SASjmWMg9oRTjkRho"
@@ -186,7 +184,7 @@ def yes_exness(update: Update, context: CallbackContext):
             InlineKeyboardButton("Finish Payment", callback_data="pay_vip"),
         ],
     ]
-    video = open("/description.MP4", "rb")
+    video = open("description.MP4", "rb")
     query.bot.send_chat_action(
         chat_id=query.from_user.id, action=ChatAction.UPLOAD_VIDEO
     )
