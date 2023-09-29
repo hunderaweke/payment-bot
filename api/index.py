@@ -44,13 +44,15 @@ class TelegramWebhook(BaseModel):
 def start(update: Update, context: CallbackContext):
     keyboard = [
         [
-            InlineKeyboardButton("VIP plan", callback_data="vip_plan"),
+            InlineKeyboardButton("😎 VIP plan", callback_data="vip_plan"),
         ],
         [
-            InlineKeyboardButton("Master Class", callback_data="master_plan"),
+            InlineKeyboardButton("🎒  Master Class", callback_data="master_plan"),
         ],
         [
-            InlineKeyboardButton("One to One Mentorship", callback_data="one_to_one"),
+            InlineKeyboardButton(
+                "💁  One to One Mentorship", callback_data="one_to_one"
+            ),
         ],
     ]
     update.message.reply_text(
@@ -79,17 +81,29 @@ A big giveaway at the end of the class\nFinish Your Payment Using One of the met
     keyboard = [
         [
             InlineKeyboardButton(
-                "Credit Card", url="https://buy.stripe.com/dR66oQ1Ow2RH3ssaEF"
+                "💳 Credit Card", url="https://buy.stripe.com/dR66oQ1Ow2RH3ssaEF"
             )
         ],
-        [InlineKeyboardButton("USDT(TRC20)", callback_data="copy_usdt_address")],
+        [
+            InlineKeyboardButton("📱 USDT(TRC20)", callback_data="copy_usdt_address"),
+        ],
+        [
+            InlineKeyboardButton("🏦 CBE(Bank)", callback_data="copy_bank_account"),
+        ],
     ]
     query.delete_message()
-    query.answer()
     query.bot.send_message(
         chat_id=query.from_user.id,
         text=text,
         reply_markup=InlineKeyboardMarkup(keyboard),
+    )
+
+
+def copy_bank_account(update: Update, context: CallbackContext):
+    query = update.callback_query
+    query.delete_message()
+    query.send_message(
+        chat_id=query.from_user.id, text="TEYIBA MOHAMMED \n```1000540470573```"
     )
 
 
@@ -98,7 +112,7 @@ def one_to_one(update: Update, context: CallbackContext):
     keyboard = [
         [
             InlineKeyboardButton(
-                "Credit Card", url="https://buy.stripe.com/7sI9B264Mdwl4ww146"
+                "💳 Credit Card", url="https://buy.stripe.com/7sI9B264Mdwl4ww146"
             )
         ],
         [InlineKeyboardButton("USDT(TRC20)", callback_data="copy_usdt_address")],
@@ -107,17 +121,37 @@ def one_to_one(update: Update, context: CallbackContext):
     query.answer()
     query.bot.send_message(
         chat_id=query.from_user.id,
-        text="Some description here",
+        text="""XE Sniper One to One Mentorship Program
+
+Basic to advanced forex trading knowledge
+
+Advanced Trading Psychology
+
+Risk and money management
+
+Access our Discord community.
+
+Access a free-quality gold signal for one month
+
+24/7 student guidance
+
+A big giveaway at the end of the class
+
+Get Xe Sniper Digital Certificate
+
+Course duration: 1 month and 15 days""",
         reply_markup=InlineKeyboardMarkup(keyboard),
     )
 
 
 def copy_usdt_address(update: Update, context: CallbackContext):
     query = update.callback_query
-    keyboard = [[InlineKeyboardButton("Send Screenshot", url="https://t.me/xesniper9")]]
+    keyboard = [
+        [InlineKeyboardButton("🖼️ Send Screenshot", url="https://t.me/xesniper9")]
+    ]
     query.bot.send_message(
         chat_id=query.from_user.id,
-        text=f"Copy the Address below:`{USDT_ADDRESS}`\nFinish the payment and send screen shot to @xesniper9",
+        text=f"Copy the Address below: 👇\n`{USDT_ADDRESS}`\nFinish the payment and send screen shot to @xesniper9",
         parse_mode=ParseMode.MARKDOWN,
     )
 
@@ -156,13 +190,13 @@ def no_exness(update: Update, context: CallbackContext):
             )
         ],
         [
-            InlineKeyboardButton("Send Screenshot", url="https://t.me/xesniper9"),
+            InlineKeyboardButton("🖼️ Send Screenshot", url="https://t.me/xesniper9"),
         ],
         [
-            InlineKeyboardButton("Contact Us", url="https://t.me/xesniper9"),
+            InlineKeyboardButton("💬 Contact Us", url="https://t.me/xesniper9"),
         ],
         [
-            InlineKeyboardButton("Finish Payment", callback_data="pay_vip"),
+            InlineKeyboardButton("😎 Finish Payment", callback_data="pay_vip"),
         ],
     ]
     query.bot.send_message(
@@ -174,14 +208,15 @@ def no_exness(update: Update, context: CallbackContext):
 
 
 def yes_exness(update: Update, context: CallbackContext):
+    query.delete_message()
     query = update.callback_query
     text = "**Change your Ib\!** \nAfter you finish your verification processes \nSend your screenshot and your Exness Email to us  👉🏼 Using the Button bellow and Finish Your Payment"
     keyboard = [
         [
-            InlineKeyboardButton("Send Screenshot", url="https://t.me/xesniper9"),
+            InlineKeyboardButton("🖼️ Send Screenshot", url="https://t.me/xesniper9"),
         ],
         [
-            InlineKeyboardButton("Finish Payment", callback_data="pay_vip"),
+            InlineKeyboardButton("😎 Finish Payment", callback_data="pay_vip"),
         ],
     ]
     video = open("description.MP4", "rb")
@@ -199,11 +234,12 @@ def yes_exness(update: Update, context: CallbackContext):
 
 def pay_vip(update: Update, context: CallbackContext):
     query = update.callback_query
+    query.delete_message()
     text = "👉🏼 Using the Button bellow and Finish Your Payment and Send the screenshot to Us"
     keyboard = [
         [
             InlineKeyboardButton(
-                "Credit Card", url="https://buy.stripe.com/cN24gI2SA9g5bYY8ww"
+                "💳 Credit Card", url="https://buy.stripe.com/cN24gI2SA9g5bYY8ww"
             ),
         ],
         [
@@ -220,6 +256,7 @@ def pay_vip(update: Update, context: CallbackContext):
 
 def vip_exness(update: Update, context: CallbackContext):
     query = update.callback_query
+    query.delete_message()
     keyboard = [
         [
             InlineKeyboardButton(
@@ -243,6 +280,9 @@ def register_handlers(dispatcher):
     dispatcher.add_handler(CallbackQueryHandler(yes_exness, pattern="have_exness"))
     dispatcher.add_handler(CallbackQueryHandler(one_to_one, pattern="one_to_one"))
     dispatcher.add_handler(CallbackQueryHandler(pay_vip, pattern="pay_vip"))
+    dispatcher.add_handler(
+        CallbackQueryHandler(copy_bank_account, pattern="copy_bank_account")
+    )
     dispatcher.add_handler(
         CallbackQueryHandler(copy_usdt_address, pattern="copy_usdt_address")
     )
