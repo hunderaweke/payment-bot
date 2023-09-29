@@ -103,7 +103,9 @@ def copy_bank_account(update: Update, context: CallbackContext):
     query = update.callback_query
     query.delete_message()
     query.send_message(
-        chat_id=query.from_user.id, text="TEYIBA MOHAMMED \n```1000540470573```"
+        chat_id=query.from_user.id,
+        text="TEYIBA MOHAMMED \n```1000540470573```",
+        parse_mode=ParseMode.MARKDOWN,
     )
 
 
